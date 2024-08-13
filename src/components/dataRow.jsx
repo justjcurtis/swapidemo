@@ -1,4 +1,4 @@
-import { CURRENCY_SYMBOL } from "../constants/ProductConstants";
+import { CURRENCY_SYMBOL } from "../constants/productConstants";
 import { capitalise } from "../utils/stringUtils";
 const styles = {
   rowStyle: {
