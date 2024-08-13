@@ -25,66 +25,70 @@ const styles = {
 
 const StarryNight = ({ children }) => {
   const maxDimension = Math.max(window.screen.width, window.screen.height)
-  const randomXY = () => {
-    return { x: getRandomInt(maxDimension), y: getRandomInt(maxDimension * 2) }
-  }
+  const randomXY = () => ({ x: getRandomInt(maxDimension), y: getRandomInt(maxDimension * 2) })
   const starCount = useRef(Math.floor((maxDimension * maxDimension * 1.5) / 10000))
-  const [stars, setStars] = useState(new Array(starCount.current).fill(0).map(() => ({ ...randomXY(), size: getRandomInt(2, 0.5), opacity: 1 })))
-  const twinkling = useRef({})
+
+  const twinkling = useRef(new Array(starCount.current).fill(undefined))
+  const [stars, setStars] = useState(new Array(starCount.current).fill(0)
+    .map(() => ({ ...randomXY(), size: getRandomInt(2, 0.5), opacity: 1 })))
 
   const draw = useCallback(() => {
     setStars((currentStars) => {
       if (!currentStars) return
       const nextStars = []
       for (let i = 0; i < currentStars.length; i++) {
-        const s = currentStars[i]
-        const isOffscreen = s.x > window.innerWidth ||
-          s.y > window.innerHeight + window.scrollY * 0.1 ||
-          s.y < window.scrollY * 0.1
+        const star = currentStars[i]
+        const isOffscreen = star.x > window.innerWidth ||
+          star.y > window.innerHeight + window.scrollY * 0.1 ||
+          star.y < window.scrollY * 0.1
+
         if (isOffscreen) {
-          nextStars.push(s)
+          nextStars.push(star)
           continue
         }
         if (twinkling.current[i] !== undefined) {
           twinkling.current[i]--
           if (twinkling.current[i] === 0) {
             twinkling.current[i] = undefined
-            s.opacity = 1
+            star.opacity = 1
           }
         } else {
           if (Math.random() >= TWINKLE_RATE) {
-            nextStars.push(s)
+            nextStars.push(star)
             continue
           }
           twinkling.current[i] = getRandomInt(20, 40)
-          s.opacity = 0
+          star.opacity = 0
         }
-        nextStars.push(s)
+        nextStars.push(star)
       }
       return nextStars
     })
   }, [])
 
   useEffect(() => {
-    setTimeout(draw, 10)
+    const timeout = setTimeout(draw, 17)
+    return () => clearTimeout(timeout)
   }, [stars, draw])
+
   return (
     <>
       <div style={styles.wrapper}>
-        {stars && stars.map((s, i) => {
-          const isOffscreen = s.x > window.innerWidth ||
-            s.y > window.innerHeight + window.scrollY * 0.1 ||
-            s.y < window.scrollY * 0.1
+        {stars && stars.map((star, i) => {
+          const isOffscreen = star.x > window.innerWidth ||
+            star.y > window.innerHeight + window.scrollY * 0.1 ||
+            star.y < window.scrollY * 0.1
           return isOffscreen ? null : (
             <div key={i} id={`star-${i}`} style={
               {
-                ...styles.star, ...{
-                  opacity: s.opacity,
-                  top: `${s.y + (-window.scrollY * 0.1)}px`,
-                  left: `${s.x}px`,
+                ...styles.star,
+                ...{
+                  opacity: star.opacity,
+                  top: `${star.y + (-window.scrollY * 0.1)}px`,
+                  left: `${star.x}px`,
                   backgroundXolor: `white`,
-                  width: `${s.size}px`,
-                  height: `${s.size}px`,
+                  width: `${star.size}px`,
+                  height: `${star.size}px`,
                 }
               }
             } />
