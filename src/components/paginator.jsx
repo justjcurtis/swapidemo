@@ -11,7 +11,9 @@ const styles = {
   },
   link: {
     cursor: 'pointer',
-    color: 'white'
+    color: 'white',
+    margin: '0.5rem',
+    color: '#CCC',
   }
 }
 
@@ -21,15 +23,15 @@ const Paginator = ({ currentPage, totalPages, onPageChange }) => {
   return (
     <div style={styles.container}>
       <ul style={styles.links}>
-        <li style={styles.link}>{"<"}</li>
+        {currentPage > 1 && <li style={styles.link} onClick={() => onPageChange(currentPage - 1)}>{"<"}</li>}
         {pagesBefore.map(page => (
-          <li key={page} onClick={() => onPageChange(page)}>{page}</li>
+          <li style={styles.link} key={page} onClick={() => onPageChange(page)}>{page}</li>
         ))}
-        <li style={{ ...styles.link, fontWeight: 'bold' }}>{currentPage}</li>
+        <li style={{ ...styles.link, fontWeight: 'bold', color: 'white' }}>{currentPage}</li>
         {pagesAfter.map(page => (
           <li style={styles.link} key={page} onClick={() => onPageChange(page)}>{page}</li>
         ))}
-        <li style={styles.link}>{">"}</li>
+        {currentPage < totalPages && <li style={styles.link} onClick={() => onPageChange(currentPage + 1)}>{">"}</li>}
       </ul>
     </div>
   )
