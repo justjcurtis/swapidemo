@@ -3,6 +3,7 @@ import DataRow from "./dataRow"
 import { DATA_ROW_HEADERS, CURRENCY_SYMBOL } from "../constants/productConstants"
 import ButtonPrimary from "./buttonPrimary"
 import { NotificationContext } from "../contexts/notification"
+import { NOTIFICATION_TYPES } from "../constants/notificationContants"
 
 const styles = {
   card: {
@@ -45,7 +46,7 @@ const ProductCard = ({ product }) => {
 
   const buyClicked = () => {
     if (amount < 1) return
-    notify(`${amount} ${product.name}${amount > 1 ? "s" : ""} added to basket (${CURRENCY_SYMBOL}${amount * product.cost_in_credits})`, 'success')
+    notify(`${amount} ${product.name}${amount > 1 ? "s" : ""} added to basket (${CURRENCY_SYMBOL}${amount * product.cost_in_credits})`, NOTIFICATION_TYPES.SUCCESS)
     setAmount(0)
   }
 

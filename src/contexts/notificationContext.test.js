@@ -2,6 +2,7 @@ import React from 'react'
 import { render, screen, act, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { NotificationContext, NotificationProvider } from './notificationContext'
+import { NOTIFICATION_TYPES } from '../constants/notificationContants'
 
 test("Notify creates notifications available in notification context", async () => {
     let notifyHandle = null
@@ -27,7 +28,7 @@ test("Notify creates notifications available in notification context", async () 
     )
 
     act(() => {
-        notifyHandle('test notification', 'warning')
+        notifyHandle('test notification', NOTIFICATION_TYPES.WARNING)
     })
 
     rerender(
@@ -37,7 +38,7 @@ test("Notify creates notifications available in notification context", async () 
     )
     await waitFor(() => {
         expect(screen.queryAllByText('test notification').length > 0).toBe(true)
-        expect(screen.queryAllByText('warning').length > 0).toBe(true)
+        expect(screen.queryAllByText(NOTIFICATION_TYPES.WARNING).length > 0).toBe(true)
     })
 })
 
