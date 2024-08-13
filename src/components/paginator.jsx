@@ -26,7 +26,7 @@ const Paginator = ({ currentPage, totalPages, onPageChange }) => {
         {pagesBefore.map(page => (
           <li style={styles.link} key={page} onClick={() => onPageChange(page)}>{page}</li>
         ))}
-        <li style={{ ...styles.link, fontWeight: 'bold', color: 'white' }}>{currentPage}</li>
+        <li style={{ ...styles.link, fontWeight: 'bold', color: '#646cff' }}>{currentPage}</li>
         {pagesAfter.map(page => (
           <li style={styles.link} key={page} onClick={() => onPageChange(page)}>{page}</li>
         ))}
