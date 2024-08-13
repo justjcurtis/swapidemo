@@ -6,6 +6,7 @@ import Grid from './components/grid.jsx';
 import Notifier from './components/notifier.jsx';
 import StarryNight from './components/starryNight.jsx';
 import NavBar from './components/navbar.jsx';
+import Paginator from './components/paginator.jsx';
 
 const styles = {
   wrapper: {
@@ -15,7 +16,7 @@ const styles = {
 }
 
 function App() {
-  const { fetchStarships, isLoading } = useContext(StarshipContext);
+  const { fetchStarships, isLoading, totalPages } = useContext(StarshipContext);
   const [starships, setStarships] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
 
@@ -37,6 +38,7 @@ function App() {
           ))}
           <NavBar />
         </Grid>
+        <Paginator currentPage={pageNumber} totalPages={totalPages} onPageChange={(newPage) => setPageNumber(newPage)} />
         <Notifier />
       </StarryNight>
     </div>
