@@ -5,7 +5,7 @@ import Toast from "./toast"
 const styles = {
   container: {
     position: 'fixed',
-    top: '1rem',
+    top: '0.5rem',
     right: '1rem',
     padding: '1rem',
   },

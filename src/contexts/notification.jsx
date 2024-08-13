@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { NOTIFICATION_TIMEOUT } from '../constants/notificationContants';
 
 const NotificationContext = React.createContext();
 const NotificationProvider = ({ children }) => {
@@ -10,9 +11,9 @@ const NotificationProvider = ({ children }) => {
     setNotifications([...notifications, { message, type, created }]);
     if (timeout.current) clearTimeout(timeout.current)
     timeout.current = setTimeout(() => {
-      setNotifications((notifications) => notifications.filter((n) => n.created < Date.now() - 3000));
+      setNotifications((notifications) => notifications.filter((n) => n.created < Date.now() - NOTIFICATION_TIMEOUT));
       timeout.current = null;
-    }, 3000);
+    }, NOTIFICATION_TIMEOUT);
   };
 
   return (
