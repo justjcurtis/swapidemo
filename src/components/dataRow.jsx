@@ -30,7 +30,6 @@ const handleValue = (title, value) => {
   value = capitalise(value)
   if (title == "Cost") value = handleCost(value);
   value = handleNumber(value);
-  if (title == "Megalights") value = `${value} MGLT`;
   if (value.toLowerCase() === "unknown" || value.toLowerCase() == "n/a") return value
   switch (title) {
     case "Megalicghts":
