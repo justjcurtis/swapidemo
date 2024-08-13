@@ -2,7 +2,7 @@ import { useState, useContext } from "react"
 import DataRow from "./dataRow"
 import { DATA_ROW_HEADERS, CURRENCY_SYMBOL } from "../constants/productConstants"
 import ButtonPrimary from "./buttonPrimary"
-import { NotificationContext } from "../contexts/notification"
+import { NotificationContext } from "../contexts/notificationContext"
 import { NOTIFICATION_TYPES } from "../constants/notificationContants"
 
 const styles = {

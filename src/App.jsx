@@ -4,6 +4,7 @@ import './App.css'
 import ProductCard from './components/productCard.jsx';
 import Grid from './components/grid.jsx';
 import Notifier from './components/notifier.jsx';
+
 function App() {
   const { fetchStarships, isLoading } = useContext(StarshipContext);
   const [starships, setStarships] = useState([]);

@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { NotificationContext } from "../contexts/notification"
+import { NotificationContext } from "../contexts/notificationContext"
 import Toast from "./toast"
 
 const styles = {
