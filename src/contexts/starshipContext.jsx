@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { NotificationContext } from './notification';
+import { NotificationContext } from './notificationContext';
 
 const StarshipContext = React.createContext();
 const StarshipProvider = ({ children }) => {
