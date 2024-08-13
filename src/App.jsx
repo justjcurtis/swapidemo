@@ -5,6 +5,14 @@ import ProductCard from './components/productCard.jsx';
 import Grid from './components/grid.jsx';
 import Notifier from './components/notifier.jsx';
 import StarryNight from './components/starryNight.jsx';
+import NavBar from './components/navbar.jsx';
+
+const styles = {
+  wrapper: {
+    width: "100%",
+    marginTop: "3rem",
+  }
+}
 
 function App() {
   const { fetchStarships, isLoading } = useContext(StarshipContext);
@@ -18,7 +26,7 @@ function App() {
   }, [pageNumber]);
 
   return (
-    <div style={{ width: "100%" }}>
+    <div style={styles.wrapper}>
       <StarryNight >
         {isLoading &&
           <h1>Loading Starships...</h1>
@@ -27,6 +35,7 @@ function App() {
           {starships.map((starship) => (
             <ProductCard key={starship.name} product={starship} />
           ))}
+          <NavBar />
         </Grid>
         <Notifier />
       </StarryNight>
