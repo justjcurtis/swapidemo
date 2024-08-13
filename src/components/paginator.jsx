@@ -13,7 +13,6 @@ const styles = {
     cursor: 'pointer',
     color: 'white',
     margin: '0.5rem',
-    color: '#CCC',
   }
 }
 
