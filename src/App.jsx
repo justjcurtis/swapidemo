@@ -1,28 +1,32 @@
-import { useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
+import { StarshipContext } from './contexts/starshipContext.jsx'
 import './App.css'
-import AddButton from './components/button'
-
+import ProductCard from './components/productCard.jsx';
+import Grid from './components/grid.jsx';
+import Notifier from './components/notifier.jsx';
 function App() {
-  const [count, setCount] = useState(0)
+  const { fetchStarships, isLoading } = useContext(StarshipContext);
+  const [starships, setStarships] = useState([]);
+  const [pageNumber, setPageNumber] = useState(1);
+
+  useEffect(() => {
+    fetchStarships(pageNumber).then((data) => {
+      setStarships(data.results);
+    })
+  }, [pageNumber]);
 
   return (
-    <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button>
-          count is {count}
-        </button>
-        <p>
-          <AddButton onClick={() => setCount((count) => count + 1)} />
-        </p>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div style={{ width: "100%" }}>
+      {isLoading &&
+        <h1>Loading Starships...</h1>
+      }
+      <Grid>
+        {starships.map((starship) => (
+          <ProductCard key={starship.name} product={starship} />
+        ))}
+      </Grid>
+      <Notifier />
+    </div>
   )
 }
 
