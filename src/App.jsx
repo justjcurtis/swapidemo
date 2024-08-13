@@ -4,6 +4,7 @@ import './App.css'
 import ProductCard from './components/productCard.jsx';
 import Grid from './components/grid.jsx';
 import Notifier from './components/notifier.jsx';
+import StarryNight from './components/starryNight.jsx';
 
 function App() {
   const { fetchStarships, isLoading } = useContext(StarshipContext);
@@ -18,15 +19,17 @@ function App() {
 
   return (
     <div style={{ width: "100%" }}>
-      {isLoading &&
-        <h1>Loading Starships...</h1>
-      }
-      <Grid>
-        {starships.map((starship) => (
-          <ProductCard key={starship.name} product={starship} />
-        ))}
-      </Grid>
-      <Notifier />
+      <StarryNight >
+        {isLoading &&
+          <h1>Loading Starships...</h1>
+        }
+        <Grid>
+          {starships.map((starship) => (
+            <ProductCard key={starship.name} product={starship} />
+          ))}
+        </Grid>
+        <Notifier />
+      </StarryNight>
     </div>
   )
 }
