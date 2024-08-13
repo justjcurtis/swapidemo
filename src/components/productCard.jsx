@@ -1,6 +1,6 @@
 import { useState, useContext } from "react"
 import DataRow from "./dataRow"
-import { DATA_ROW_HEADERS } from "../constants/ProductConstants"
+import { DATA_ROW_HEADERS } from "../constants/productConstants"
 import ButtonPrimary from "./buttonPrimary"
 import { NotificationContext } from "../contexts/notification"
 
@@ -30,8 +30,6 @@ const styles = {
   },
 }
 
-
-
 const ProductCard = ({ product }) => {
   const { notify } = useContext(NotificationContext)
   const [amount, setAmount] = useState(0)
@@ -47,6 +45,12 @@ const ProductCard = ({ product }) => {
     notify(`Added 1 ${product.name} to cart`, 'success')
   }
 
+  const buyClicked = () => {
+    if (amount < 1) return
+    notify(`Purchased ${amount} ${product.name} at total cost ${amount * product.cost_in_credits}`, 'success')
+    setAmount(0)
+  }
+
   return (
     <div style={styles.card}>
       <h1 style={styles.title}>{product.name}</h1>
@@ -59,7 +63,7 @@ const ProductCard = ({ product }) => {
       ))}
       <div style={styles.buttonContainer}>
         <ButtonPrimary text="-" onClick={decrementClicked} />
-        <ButtonPrimary text={buyText} />
+        <ButtonPrimary text={buyText} onClick={buyClicked} />
         <ButtonPrimary text="+" onClick={incrementClicked} />
       </div>
     </div>
