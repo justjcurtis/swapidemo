@@ -45,7 +45,10 @@ const ProductCard = ({ product }) => {
   }
 
   const buyClicked = () => {
-    if (amount < 1) return
+    if (amount < 1) {
+      notify("Please add at least 1 item to your basket", NOTIFICATION_TYPES.ERROR)
+      return
+    }
     notify(`${amount} ${product.name}${amount > 1 ? "s" : ""} added to basket (${CURRENCY_SYMBOL}${amount * product.cost_in_credits})`, NOTIFICATION_TYPES.SUCCESS)
     setAmount(0)
   }
