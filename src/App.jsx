@@ -32,14 +32,18 @@ function App() {
         {isLoading &&
           <h1>Loading Starships...</h1>
         }
-        <Grid>
-          {starships.map((starship) => (
-            <ProductCard key={starship.name} product={starship} />
-          ))}
-          <NavBar />
-        </Grid>
-        <Paginator currentPage={pageNumber} totalPages={totalPages} onPageChange={(newPage) => setPageNumber(newPage)} />
-        <Notifier />
+        {!isLoading &&
+          <>
+            <Grid>
+              {starships.map((starship) => (
+                <ProductCard key={starship.name} product={starship} />
+              ))}
+              <NavBar />
+            </Grid>
+            <Paginator currentPage={pageNumber} totalPages={totalPages} onPageChange={(newPage) => setPageNumber(newPage)} />
+            <Notifier />
+          </>
+        }
       </StarryNight>
     </div>
   )
