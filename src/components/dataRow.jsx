@@ -31,6 +31,7 @@ const handleValue = (title, value) => {
   if (title == "Cost") value = handleCost(value);
   value = handleNumber(value);
   if (title == "Megalights") value = `${value} MGLT`;
+  if (value.toLowerCase() === "unknown" || value.toLowerCase() == "n/a") return value
   switch (title) {
     case "Megalicghts":
       return `${value} MGLT`
@@ -39,8 +40,7 @@ const handleValue = (title, value) => {
     case "Consumables":
       return `${value} years`
     case "Max Atmosphering Speed":
-      if (value !== "N/A") return `${value} km/h`
-      break
+      return `${value} km/h`
     case "Length":
       return `${value} m`
   }
