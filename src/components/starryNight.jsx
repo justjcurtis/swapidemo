@@ -76,9 +76,6 @@ const StarryNight = ({ children }) => {
           const isOffscreen = s.x > window.innerWidth ||
             s.y > window.innerHeight + window.scrollY * 0.1 ||
             s.y < window.scrollY * 0.1
-          if (i == 0) {
-            console.log(s.x, s.y)
-          }
           return isOffscreen ? null : (
             <div key={i} id={`star-${i}`} style={
               {
