@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { NotificationContext } from './notification';
 
 const StarshipContext = React.createContext();
 const StarshipProvider = ({ children }) => {
+  const { notify } = useContext(NotificationContext)
   const [isLoading, setLoading] = useState(true);
 
   const fetchStarships = async (pageNumber) => {
@@ -12,6 +14,7 @@ const StarshipProvider = ({ children }) => {
       const data = await response.json();
       return data;
     } catch (error) {
+      notify('Failed to fetch starships, please try again later', 'error');
       console.error(error);
     } finally {
       setLoading(false);
