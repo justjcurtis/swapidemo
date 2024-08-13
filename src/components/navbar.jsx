@@ -30,7 +30,7 @@ const NavBar = () => {
         {menuOpen && <div className="hamburgerMenu">
           <ul className='navLinks'>
             <li className='navbarItem'>
-              <a href="/">Starships</a>
+              <a href="/swapidemo/">Starships</a>
             </li>
             <li className='navbarItem'>
               People
@@ -49,7 +49,7 @@ const NavBar = () => {
             </li>
           </ul>
         </div>}
-        <a href="/" className='logo'>
+        <a href="/swapidemo/" className='logo'>
           SWAPI Demo
         </a>
       </div>
