@@ -11,6 +11,6 @@ const capitaliseTestCases = [
     ['!!!!!', '!!!!!'],
 ];
 
-it.each(capitaliseTestCases)('capitalize(%s) should return %s', (input, expected) => {
+test.each(capitaliseTestCases)('capitalize(%s) should return %s', (input, expected) => {
     expect(capitalise(input)).toBe(expected);
 })
