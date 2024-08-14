@@ -29,6 +29,68 @@ describe("ProductCard", () => {
                 expect(notify).toHaveBeenCalledWith("Please add at least 1 item to your basket", "error")
             })
         })
+        test("Calls 'notify' with error when buy button is clicked after '-' clicked multiple times", async () => {
+            const product = starships[0]
+            const notify = jest.fn()
+            const { getByText, rerender } = render(
+                <NotificationContext.Provider value={{ notify }}>
+                    <ProductCard product={product} />
+                </NotificationContext.Provider>
+            )
+            act(() => {
+                getByText("-").click()
+            })
+            rerender(
+                <NotificationContext.Provider value={{ notify }}>
+                    <ProductCard product={product} />
+                </NotificationContext.Provider>
+            )
+            act(() => {
+                getByText("-").click()
+            })
+            rerender(
+                <NotificationContext.Provider value={{ notify }}>
+                    <ProductCard product={product} />
+                </NotificationContext.Provider>
+            )
+            act(() => {
+                getByText("BUY").click()
+            })
+            await waitFor(() => {
+                expect(notify).toHaveBeenCalledWith("Please add at least 1 item to your basket", "error")
+            })
+        })
+        test("Calls 'notify' with error when buy button is clicked after amount returns to 0", async () => {
+            const product = starships[0]
+            const notify = jest.fn()
+            const { getByText, rerender } = render(
+                <NotificationContext.Provider value={{ notify }}>
+                    <ProductCard product={product} />
+                </NotificationContext.Provider>
+            )
+            act(() => {
+                getByText("+").click()
+            })
+            rerender(
+                <NotificationContext.Provider value={{ notify }}>
+                    <ProductCard product={product} />
+                </NotificationContext.Provider>
+            )
+            act(() => {
+                getByText("-").click()
+            })
+            rerender(
+                <NotificationContext.Provider value={{ notify }}>
+                    <ProductCard product={product} />
+                </NotificationContext.Provider>
+            )
+            act(() => {
+                getByText("BUY").click()
+            })
+            await waitFor(() => {
+                expect(notify).toHaveBeenCalledWith("Please add at least 1 item to your basket", "error")
+            })
+        })
     })
 
     describe("when amount is greater than 0", () => {
