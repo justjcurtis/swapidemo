@@ -51,7 +51,7 @@ This project is a Single Page Application (SPA) built with React that displays a
 
 4. **Run tests**:
    ```bash
-   npm test
+   npm run test
    ```
    or
    ```bash
